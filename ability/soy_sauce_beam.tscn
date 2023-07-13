@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8xn1tqlkk8v1"]
+
+[ext_resource type="Texture2D" uid="uid://bnui6tl8ignw5" path="res://ability/soy_sauce_beam.png" id="1_1ejsh"]
+[ext_resource type="Script" path="res://ability/soy_sauce_beam.gd" id="1_3y36r"]
+[ext_resource type="PackedScene" uid="uid://df1hbhk2ocihw" path="res://component/hitbox_component.tscn" id="2_7vwdi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dtgh"]
+size = Vector2(9, 10)
+
+[node name="SoySauceBeam" type="Node2D"]
+script = ExtResource("1_3y36r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 0)
+texture = ExtResource("1_1ejsh")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_7vwdi")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(4.5, 0)
+shape = SubResource("RectangleShape2D_7dtgh")

@@ -178,7 +178,7 @@ position = Vector2(48, 47)
 position = Vector2(129, 115)
 
 [node name="EnemyOctopus2" parent="." instance=ExtResource("5_xbhch")]
-position = Vector2(74, 132)
+position = Vector2(264, 100)
 
 [node name="EnemyOctopus3" parent="." instance=ExtResource("5_xbhch")]
-position = Vector2(157, 78)
+position = Vector2(121, 175)

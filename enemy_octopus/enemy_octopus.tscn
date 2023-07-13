@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://csok4fir3f4nq"]
+[gd_scene load_steps=8 format=3 uid="uid://csok4fir3f4nq"]
 
 [ext_resource type="Script" path="res://enemy_octopus/enemy_octopus.gd" id="1_1dcr7"]
 [ext_resource type="Texture2D" uid="uid://dknwqatj8d627" path="res://enemy_octopus/enemy_octopus.png" id="1_wcxgg"]
 [ext_resource type="PackedScene" uid="uid://uhbm00tw6bxl" path="res://component/move_component.tscn" id="2_a504j"]
+[ext_resource type="PackedScene" uid="uid://c45p4vd6jtdfo" path="res://component/hurtbox_component.tscn" id="4_ta4xl"]
+[ext_resource type="PackedScene" uid="uid://don1hm0ooum38" path="res://component/health_component.tscn" id="5_0gobu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_drg75"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1ode"]
+radius = 12.0
 
 [node name="EnemyOctopus" type="CharacterBody2D"]
 collision_layer = 2
@@ -15,6 +20,8 @@ script = ExtResource("1_1dcr7")
 [node name="MoveComponent" parent="." instance=ExtResource("2_a504j")]
 move_speed = 50
 
+[node name="HealthComponent" parent="." instance=ExtResource("5_0gobu")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("1_wcxgg")
@@ -22,3 +29,10 @@ texture = ExtResource("1_wcxgg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_drg75")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_ta4xl")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_a1ode")

@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqsqjbj0e2ppc"]
+[gd_scene load_steps=8 format=3 uid="uid://dqsqjbj0e2ppc"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pnoun"]
 [ext_resource type="PackedScene" uid="uid://uhbm00tw6bxl" path="res://component/move_component.tscn" id="2_1btwe"]
 [ext_resource type="Texture2D" uid="uid://dxoahtoq4q8uw" path="res://player/player.png" id="2_lr7uw"]
+[ext_resource type="PackedScene" uid="uid://don1hm0ooum38" path="res://component/health_component.tscn" id="3_3hnbb"]
+[ext_resource type="PackedScene" uid="uid://c8xn1tqlkk8v1" path="res://ability/soy_sauce_beam.tscn" id="4_0vxnd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aidi5"]
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4vih"]
 radius = 6.0
@@ -13,10 +18,32 @@ script = ExtResource("1_pnoun")
 [node name="MoveComponent" parent="." instance=ExtResource("2_1btwe")]
 move_speed = 200
 
+[node name="HealthComponent" parent="." instance=ExtResource("3_3hnbb")]
+
+[node name="ability" type="Node" parent="."]
+
+[node name="EnemyCollisionArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollisionArea2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_aidi5")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("2_lr7uw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_o4vih")
+
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="SoySauceBeam" parent="Node2D" instance=ExtResource("4_0vxnd")]
+position = Vector2(11, -8)
